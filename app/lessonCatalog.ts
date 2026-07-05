@@ -16,6 +16,14 @@ export const lessonCatalog = [
     minutes: 10
   },
   {
+    id: "matrix-operations",
+    title: "Matrix Operations",
+    question: "How do matrices use rows and columns for addition, subtraction, multiplication, and division?",
+    formula: "same-size add/subtract, row-by-column multiply, inverse for division",
+    difficulty: "Matrices",
+    minutes: 10
+  },
+  {
     id: "distributive-property",
     title: "Distributive Property",
     question: "How does multiplication distribute across parentheses?",
