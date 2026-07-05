@@ -306,6 +306,45 @@ const simultaneousSteps = [
   }
 ];
 
+const matrixOperationSteps = [
+  {
+    label: "Matrix",
+    title: "A matrix is a number grid",
+    text: "A matrix stores numbers in rows and columns. The size is written as rows by columns.",
+    formula: "A is 2 × 2"
+  },
+  {
+    label: "Add",
+    title: "Add matching positions",
+    text: "Matrix addition is entry by entry. The matrices must have the same size.",
+    formula: "A + B = [aᵢⱼ + bᵢⱼ]"
+  },
+  {
+    label: "Subtract",
+    title: "Subtract matching positions",
+    text: "Matrix subtraction uses the same position-by-position idea, but subtracts each matching entry.",
+    formula: "A - B = [aᵢⱼ - bᵢⱼ]"
+  },
+  {
+    label: "Multiply",
+    title: "Multiply rows by columns",
+    text: "To multiply matrices, match each row of the first matrix with each column of the second matrix.",
+    formula: "(AB)ᵢⱼ = row i × column j"
+  },
+  {
+    label: "Divide",
+    title: "Use an inverse instead of division",
+    text: "Matrices do not have direct division. Dividing by a matrix means multiplying by its inverse, if that inverse exists.",
+    formula: "A ÷ B means A × B⁻¹"
+  },
+  {
+    label: "Rules",
+    title: "Check the size rules first",
+    text: "Addition and subtraction need identical sizes. Multiplication needs columns of the first matrix to match rows of the second.",
+    formula: "2 × 3 times 3 × 2 gives 2 × 2"
+  }
+];
+
 const distributiveSteps = [
   {
     label: "Group",
@@ -529,6 +568,13 @@ const lessons = [
     steps: simultaneousSteps
   },
   {
+    id: "matrix-operations",
+    title: "Matrix Operations",
+    category: "Matrices",
+    eyebrow: "Rows and columns",
+    steps: matrixOperationSteps
+  },
+  {
     id: "distributive-property",
     title: "Distributive Property",
     category: "Algebra",
@@ -656,7 +702,7 @@ const lessons = [
   }
 ];
 
-const lessonCategories = ["Algebra", "Geometry", "Trigonometry", "Circles"];
+const lessonCategories = ["Algebra", "Matrices", "Geometry", "Trigonometry", "Circles"];
 
 type LessonWriteup = {
   title: string;
@@ -826,6 +872,108 @@ const lessonWriteups: Record<string, LessonWriteup> = {
           </MathLine>,
           <MathLine key="check-three">
             (4, 3) works for both equations
+          </MathLine>
+        ]
+      }
+    ]
+  },
+  "matrix-operations": {
+    title: "Worked Examples",
+    intro: "Matrix operations are mostly size rules plus careful entry-by-entry arithmetic. Multiplication is the exception: it uses rows from the first matrix and columns from the second.",
+    sections: [
+      {
+        heading: "Step 1: Read the matrix size",
+        body: "Count rows first, then columns. This matrix has 2 rows and 2 columns.",
+        math: [
+          <MathLine key="matrix-size">
+            A <MathOp>=</MathOp> <Matrix rows={[[1, 2], [3, 4]]} />
+          </MathLine>,
+          <MathLine key="matrix-order">
+            size of A <MathOp>=</MathOp> 2 <MathOp>×</MathOp> 2
+          </MathLine>
+        ]
+      },
+      {
+        heading: "Step 2: Add matching entries",
+        body: "Addition only works when both matrices have the same size. Add each position to its matching position.",
+        math: [
+          <MathLine key="matrix-add-start">
+            <Matrix rows={[[1, 2], [3, 4]]} /> <MathOp>+</MathOp> <Matrix rows={[[5, 6], [7, 8]]} />
+          </MathLine>,
+          <MathLine key="matrix-add-work">
+            <Matrix rows={[["1 + 5", "2 + 6"], ["3 + 7", "4 + 8"]]} />
+          </MathLine>,
+          <MathLine key="matrix-add-answer">
+            <Matrix rows={[[6, 8], [10, 12]]} />
+          </MathLine>
+        ]
+      },
+      {
+        heading: "Step 3: Subtract matching entries",
+        body: "Subtraction also needs the same size. Keep the order: first matrix minus second matrix.",
+        math: [
+          <MathLine key="matrix-sub-start">
+            <Matrix rows={[[5, 6], [7, 8]]} /> <MathOp>-</MathOp> <Matrix rows={[[1, 2], [3, 4]]} />
+          </MathLine>,
+          <MathLine key="matrix-sub-work">
+            <Matrix rows={[["5 - 1", "6 - 2"], ["7 - 3", "8 - 4"]]} />
+          </MathLine>,
+          <MathLine key="matrix-sub-answer">
+            <Matrix rows={[[4, 4], [4, 4]]} />
+          </MathLine>
+        ]
+      },
+      {
+        heading: "Step 4: Multiply rows by columns",
+        body: "Each answer entry comes from one row and one column. Write each product-sum on its own line so the row-column matches stay visible.",
+        math: [
+          <MathLine key="matrix-mul-start">
+            <Matrix rows={[[1, 2], [3, 4]]} /> <MathOp>×</MathOp> <Matrix rows={[[2, 0], [1, 2]]} />
+          </MathLine>,
+          <MathLine key="matrix-mul-a">
+            top left <MathOp>=</MathOp> 1<MathOp>×</MathOp>2 <MathOp>+</MathOp> 2<MathOp>×</MathOp>1 <MathOp>=</MathOp> 4
+          </MathLine>,
+          <MathLine key="matrix-mul-b">
+            top right <MathOp>=</MathOp> 1<MathOp>×</MathOp>0 <MathOp>+</MathOp> 2<MathOp>×</MathOp>2 <MathOp>=</MathOp> 4
+          </MathLine>,
+          <MathLine key="matrix-mul-c">
+            bottom left <MathOp>=</MathOp> 3<MathOp>×</MathOp>2 <MathOp>+</MathOp> 4<MathOp>×</MathOp>1 <MathOp>=</MathOp> 10
+          </MathLine>,
+          <MathLine key="matrix-mul-d">
+            bottom right <MathOp>=</MathOp> 3<MathOp>×</MathOp>0 <MathOp>+</MathOp> 4<MathOp>×</MathOp>2 <MathOp>=</MathOp> 8
+          </MathLine>,
+          <MathLine key="matrix-mul-answer">
+            <Matrix rows={[[4, 4], [10, 8]]} />
+          </MathLine>
+        ]
+      },
+      {
+        heading: "Step 5: Divide by using an inverse",
+        body: "There is no direct matrix division. If B has an inverse, divide by B by multiplying by B inverse.",
+        math: [
+          <MathLine key="matrix-div-not">
+            A <MathOp>÷</MathOp> B is not a direct operation
+          </MathLine>,
+          <MathLine key="matrix-div-meaning">
+            A <MathOp>÷</MathOp> B means A <MathOp>×</MathOp> B<sup>-1</sup>
+          </MathLine>,
+          <MathLine key="matrix-div-solve">
+            AX <MathOp>=</MathOp> C, so X <MathOp>=</MathOp> A<sup>-1</sup>C
+          </MathLine>
+        ]
+      },
+      {
+        heading: "Step 6: Check whether the operation is allowed",
+        body: "Before calculating, check the sizes. This prevents most matrix mistakes.",
+        math: [
+          <MathLine key="matrix-rule-add">
+            add or subtract: 2 <MathOp>×</MathOp> 2 with 2 <MathOp>×</MathOp> 2
+          </MathLine>,
+          <MathLine key="matrix-rule-multiply">
+            multiply: 2 <MathOp>×</MathOp> 3 with 3 <MathOp>×</MathOp> 2 gives 2 <MathOp>×</MathOp> 2
+          </MathLine>,
+          <MathLine key="matrix-rule-inverse">
+            inverse: only square matrices can have B<sup>-1</sup>
           </MathLine>
         ]
       }
@@ -1434,6 +1582,7 @@ export default function Home({ initialLessonId }: { initialLessonId?: string } =
           {lesson.id === "radians" && <SectorDiagram mode="radian" step={step} />}
           {lesson.id === "equation-balance" && <AlgebraDiagram kind="balance" step={step} />}
           {lesson.id === "simultaneous-equations" && <SimultaneousDiagram step={step} />}
+          {lesson.id === "matrix-operations" && <MatrixDiagram step={step} />}
           {lesson.id === "distributive-property" && <AlgebraDiagram kind="distribute" step={step} />}
           {lesson.id === "factoring-quadratics" && <AlgebraDiagram kind="factor" step={step} />}
           {lesson.id === "common-factor" && <FactorMethodDiagram method="common" step={step} />}
@@ -1528,6 +1677,24 @@ function MathOp({ children }: { children: ReactNode }) {
   return <span className="mathOp">{children}</span>;
 }
 
+function Matrix({ rows }: { rows: ReactNode[][] }) {
+  const columnCount = rows[0]?.length ?? 0;
+
+  return (
+    <span className="matrixNotation">
+      <span className="matrixBracket">[</span>
+      <span className="matrixGrid" style={{ gridTemplateColumns: `repeat(${columnCount}, auto)` }}>
+        {rows.flatMap((row, rowIndex) =>
+          row.map((cell, columnIndex) => (
+            <span key={`${rowIndex}-${columnIndex}`}>{renderMathTokens(cell)}</span>
+          ))
+        )}
+      </span>
+      <span className="matrixBracket">]</span>
+    </span>
+  );
+}
+
 function renderMathTokens(node: ReactNode): ReactNode {
   if (typeof node === "string" || typeof node === "number") {
     return tokenizeMathText(String(node));
@@ -1545,14 +1712,14 @@ function renderMathTokens(node: ReactNode): ReactNode {
 }
 
 function tokenizeMathText(text: string): ReactNode[] {
-  const pieces = text.split(/([+\-=×±])/g);
+  const pieces = text.split(/([+\-=×±÷])/g);
 
   return pieces.flatMap((piece, pieceIndex) => {
     if (!piece) {
       return [];
     }
 
-    if (/^[+\-=×±]$/.test(piece)) {
+    if (/^[+\-=×±÷]$/.test(piece)) {
       return [<MathOp key={`op-${pieceIndex}`}>{piece}</MathOp>];
     }
 
@@ -1941,6 +2108,158 @@ function SimultaneousDiagram({ step }: { step: number }) {
         </g>
       </svg>
     </div>
+  );
+}
+
+function MatrixDiagram({ step }: { step: number }) {
+  const headings = [
+    ["Matrix size", "rows first, columns second"],
+    ["Addition", "add entries in the same position"],
+    ["Subtraction", "subtract entries in the same position"],
+    ["Multiplication", "row times column makes one entry"],
+    ["No direct division", "multiply by an inverse instead"],
+    ["Size rules", "check whether the operation is allowed"]
+  ];
+  const [heading, detail] = headings[step] ?? headings[0];
+
+  return (
+    <div className="diagram matrixDiagram" data-matrix-step={step}>
+      <svg viewBox="0 0 760 430" role="img" aria-label="Animated matrix operations explanation">
+        <DiagramDefs />
+        <rect width="760" height="430" rx="6" fill="#f6f1e8" />
+        <rect width="760" height="430" rx="6" fill="url(#grid)" opacity="0.75" />
+
+        <g className="matrixTitleCard">
+          <rect x="70" y="38" width="620" height="70" rx="10" />
+          <text className="matrixTitle" x="380" y="72">{heading}</text>
+          <text className="matrixSubtitle" x="380" y="96">{detail}</text>
+        </g>
+
+        {step === 0 && (
+          <>
+            <g className="matrixBoard largeMatrix" transform="translate(274 142)">
+              <rect width="212" height="178" rx="10" />
+              <text className="matrixCellSvg" x="64" y="72">1</text>
+              <text className="matrixCellSvg" x="148" y="72">2</text>
+              <text className="matrixCellSvg" x="64" y="128">3</text>
+              <text className="matrixCellSvg" x="148" y="128">4</text>
+              <path className="matrixBracketSvg left" d="M42 34 H24 V146 H42" />
+              <path className="matrixBracketSvg right" d="M170 34 H188 V146 H170" />
+            </g>
+            <path className="matrixRowGuide" d="M246 212 H514" />
+            <path className="matrixColumnGuide" d="M380 122 V346" />
+            <text className="matrixGuideText" x="176" y="218">2 rows</text>
+            <text className="matrixGuideText" x="394" y="356">2 columns</text>
+          </>
+        )}
+
+        {step === 1 && (
+          <>
+            <MatrixSvgCard x={72} y={150} rows={[["1", "2"], ["3", "4"]]} highlight={[0, 0]} />
+            <text className="matrixOperatorSvg" x="235" y="245">+</text>
+            <MatrixSvgCard x={274} y={150} rows={[["5", "6"], ["7", "8"]]} highlight={[0, 0]} />
+            <text className="matrixOperatorSvg" x="438" y="245">=</text>
+            <MatrixSvgCard x={480} y={150} rows={[["6", "8"], ["10", "12"]]} highlight={[0, 0]} result />
+            <text className="matrixNoteSvg" x="380" y="346">1 + 5 = 6, then repeat for each matching position</text>
+          </>
+        )}
+
+        {step === 2 && (
+          <>
+            <MatrixSvgCard x={72} y={150} rows={[["5", "6"], ["7", "8"]]} highlight={[1, 1]} />
+            <text className="matrixOperatorSvg" x="235" y="245">-</text>
+            <MatrixSvgCard x={274} y={150} rows={[["1", "2"], ["3", "4"]]} highlight={[1, 1]} />
+            <text className="matrixOperatorSvg" x="438" y="245">=</text>
+            <MatrixSvgCard x={480} y={150} rows={[["4", "4"], ["4", "4"]]} highlight={[1, 1]} result />
+            <text className="matrixNoteSvg" x="380" y="346">8 - 4 = 4, with the same-position rule</text>
+          </>
+        )}
+
+        {step === 3 && (
+          <>
+            <MatrixSvgCard x={66} y={142} rows={[["1", "2"], ["3", "4"]]} rowHighlight={0} />
+            <text className="matrixOperatorSvg" x="226" y="238">×</text>
+            <MatrixSvgCard x={270} y={142} rows={[["2", "0"], ["1", "2"]]} columnHighlight={0} />
+            <text className="matrixOperatorSvg" x="430" y="238">=</text>
+            <MatrixSvgCard x={474} y={142} rows={[["4", "4"], ["10", "8"]]} highlight={[0, 0]} result />
+            <g className="matrixWorkCard">
+              <rect x="202" y="318" width="356" height="46" rx="8" />
+              <text x="380" y="348">1 × 2 + 2 × 1 = 4</text>
+            </g>
+          </>
+        )}
+
+        {step === 4 && (
+          <>
+            <g className="matrixInverseCard">
+              <rect x="112" y="154" width="536" height="164" rx="12" />
+              <text className="matrixInverseMain" x="380" y="214">A ÷ B is not direct division</text>
+              <text className="matrixInverseArrow" x="380" y="252">A ÷ B means A × B⁻¹</text>
+              <text className="matrixInverseSub" x="380" y="286">only when B has an inverse</text>
+            </g>
+          </>
+        )}
+
+        {step === 5 && (
+          <>
+            <g className="matrixRuleCard" transform="translate(70 150)">
+              <rect width="190" height="132" rx="10" />
+              <text x="95" y="44">Add / subtract</text>
+              <text className="matrixRuleText" x="95" y="82">same size</text>
+              <text className="matrixRuleText" x="95" y="108">2 × 2 with 2 × 2</text>
+            </g>
+            <g className="matrixRuleCard" transform="translate(285 150)">
+              <rect width="190" height="132" rx="10" />
+              <text x="95" y="44">Multiply</text>
+              <text className="matrixRuleText" x="95" y="82">inside sizes match</text>
+              <text className="matrixRuleText" x="95" y="108">2 × 3 with 3 × 2</text>
+            </g>
+            <g className="matrixRuleCard" transform="translate(500 150)">
+              <rect width="190" height="132" rx="10" />
+              <text x="95" y="44">Inverse</text>
+              <text className="matrixRuleText" x="95" y="82">square matrix</text>
+              <text className="matrixRuleText" x="95" y="108">determinant not 0</text>
+            </g>
+          </>
+        )}
+      </svg>
+    </div>
+  );
+}
+
+function MatrixSvgCard({
+  x,
+  y,
+  rows,
+  highlight,
+  rowHighlight,
+  columnHighlight,
+  result = false
+}: {
+  x: number;
+  y: number;
+  rows: string[][];
+  highlight?: [number, number];
+  rowHighlight?: number;
+  columnHighlight?: number;
+  result?: boolean;
+}) {
+  return (
+    <g className={result ? "matrixBoard matrixResultBoard" : "matrixBoard"} transform={`translate(${x} ${y})`}>
+      <rect width="142" height="150" rx="10" />
+      {rowHighlight !== undefined && <rect className="matrixBand" x="30" y={38 + rowHighlight * 44} width="82" height="34" rx="6" />}
+      {columnHighlight !== undefined && <rect className="matrixBand" x={38 + columnHighlight * 42} y="32" width="32" height="86" rx="6" />}
+      {highlight && <rect className="matrixCellHighlight" x={35 + highlight[1] * 42} y={38 + highlight[0] * 44} width="38" height="34" rx="6" />}
+      <path className="matrixBracketSvg left" d="M28 28 H14 V122 H28" />
+      <path className="matrixBracketSvg right" d="M114 28 H128 V122 H114" />
+      {rows.map((row, rowIndex) =>
+        row.map((value, columnIndex) => (
+          <text className="matrixCellSvg" key={`${rowIndex}-${columnIndex}`} x={52 + columnIndex * 42} y={62 + rowIndex * 44}>
+            {value}
+          </text>
+        ))
+      )}
+    </g>
   );
 }
 

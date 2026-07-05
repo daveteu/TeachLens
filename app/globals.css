@@ -1407,6 +1407,119 @@ h2 {
   transform: scale(1.2);
 }
 
+.matrixTitleCard rect,
+.matrixBoard rect,
+.matrixWorkCard rect,
+.matrixInverseCard rect,
+.matrixRuleCard rect {
+  fill: rgba(255, 255, 255, 0.76);
+  stroke: var(--line);
+  stroke-width: 3;
+}
+
+.matrixTitle,
+.matrixSubtitle,
+.matrixGuideText,
+.matrixNoteSvg,
+.matrixCellSvg,
+.matrixOperatorSvg,
+.matrixWorkCard text,
+.matrixInverseMain,
+.matrixInverseArrow,
+.matrixInverseSub,
+.matrixRuleCard text {
+  font-weight: 800;
+  text-anchor: middle;
+}
+
+.matrixTitle {
+  fill: var(--ink);
+  font-size: 26px;
+}
+
+.matrixSubtitle,
+.matrixGuideText,
+.matrixNoteSvg,
+.matrixInverseSub,
+.matrixRuleText {
+  fill: var(--muted);
+  font-size: 17px;
+}
+
+.matrixBoard rect {
+  fill: rgba(255, 255, 255, 0.68);
+}
+
+.matrixResultBoard rect,
+.matrixWorkCard rect {
+  fill: var(--green-soft);
+}
+
+.matrixCellSvg {
+  fill: var(--ink);
+  font-size: 28px;
+}
+
+.matrixOperatorSvg {
+  fill: var(--orange);
+  font-size: 34px;
+}
+
+.matrixBracketSvg {
+  fill: none;
+  stroke: var(--ink);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 5;
+}
+
+.matrixBand {
+  fill: rgba(105, 185, 255, 0.28);
+}
+
+.matrixCellHighlight {
+  fill: rgba(11, 116, 232, 0.18);
+  stroke: var(--green);
+  stroke-width: 2;
+}
+
+.matrixRowGuide,
+.matrixColumnGuide {
+  stroke: var(--orange);
+  stroke-linecap: round;
+  stroke-width: 4;
+}
+
+.matrixNoteSvg {
+  fill: var(--blue);
+  font-size: 18px;
+}
+
+.matrixWorkCard text {
+  fill: var(--blue);
+  font-size: 22px;
+}
+
+.matrixInverseMain {
+  fill: var(--ink);
+  font-size: 26px;
+}
+
+.matrixInverseArrow {
+  fill: var(--blue);
+  font-size: 30px;
+}
+
+.matrixRuleCard text {
+  fill: var(--ink);
+  font-size: 20px;
+}
+
+.matrixRuleCard .matrixRuleText {
+  fill: var(--muted);
+  font-size: 15px;
+}
+
 .factorTitle,
 .factorText,
 .factorHint,
@@ -1699,6 +1812,32 @@ h2 {
   margin: 0 0.28em;
   color: #667986;
   font-weight: 500;
+}
+
+.matrixNotation {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.12em;
+  margin: 0 0.08em;
+  vertical-align: middle;
+}
+
+.matrixBracket {
+  color: currentColor;
+  font-size: 1.9em;
+  font-weight: 400;
+  line-height: 0.85;
+  transform: scaleY(1.24);
+}
+
+.matrixGrid {
+  display: grid;
+  align-items: center;
+  justify-items: center;
+  column-gap: 0.58em;
+  row-gap: 0.18em;
+  font-size: 0.94em;
+  line-height: 1.08;
 }
 
 .mathLine sup {
