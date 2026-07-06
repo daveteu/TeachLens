@@ -252,6 +252,33 @@ const radianSteps = [
   }
 ];
 
+const angleFromArcSteps = [
+  {
+    label: "Given",
+    title: "Start with arc length and radius",
+    text: "Some questions give the arc length and radius, then ask for the central angle.",
+    formula: "arc length = 0.7π, r = 3.5"
+  },
+  {
+    label: "Formula",
+    title: "Use the arc length formula",
+    text: "In degrees, arc length is the same fraction of the circumference as the angle is of 360 degrees.",
+    formula: "arc = 2πr × θ / 360"
+  },
+  {
+    label: "Minor",
+    title: "Solve the minor angle first",
+    text: "The given minor arc gives the smaller central angle. Rearrange the formula to find it.",
+    formula: "x = 36°"
+  },
+  {
+    label: "Major",
+    title: "Convert if the question asks for the major angle",
+    text: "A full turn is 360 degrees, so the major angle is the rest of the circle.",
+    formula: "y = 360° - 36° = 324°"
+  }
+];
+
 const equationBalanceSteps = [
   {
     label: "Equation",
@@ -699,6 +726,13 @@ const lessons = [
     category: "Circles",
     eyebrow: "Angle from arc length",
     steps: radianSteps
+  },
+  {
+    id: "angle-from-arc",
+    title: "Angle from Arc Length",
+    category: "Circles",
+    eyebrow: "Calculate theta",
+    steps: angleFromArcSteps
   }
 ];
 
@@ -1423,7 +1457,7 @@ const lessonWriteups: Record<string, LessonWriteup> = {
       }
     ]
   },
-  radians: {
+  "angle-from-arc": {
     title: "Worked Example",
     intro: "Sometimes the question gives the arc length and radius, then asks for the angle. First find the minor angle, then decide whether the question wants the minor angle or the major angle.",
     sections: [
@@ -1645,6 +1679,7 @@ export default function Home({ initialLessonId }: { initialLessonId?: string } =
           {lesson.id === "sector-area" && <SectorDiagram mode="area" step={step} />}
           {lesson.id === "sector-perimeter" && <SectorDiagram mode="perimeter" step={step} />}
           {lesson.id === "radians" && <SectorDiagram mode="radian" step={step} />}
+          {lesson.id === "angle-from-arc" && <AngleFromArcDiagram step={step} />}
           {lesson.id === "equation-balance" && <AlgebraDiagram kind="balance" step={step} />}
           {lesson.id === "simultaneous-equations" && <SimultaneousDiagram step={step} />}
           {lesson.id === "matrix-operations" && <MatrixDiagram step={step} />}
@@ -2150,6 +2185,52 @@ function SectorDiagram({ mode, step }: { mode: "area" | "perimeter" | "radian"; 
           <text className="sectorLine radianFull" x="476" y="128">full turn = 2 pi radians</text>
           <text className="sectorLine radianBridge" x="476" y="128">arc = r theta</text>
           <text className="sectorAnswer" x="476" y="182">theta in radians</text>
+        </g>
+      </svg>
+    </div>
+  );
+}
+
+function AngleFromArcDiagram({ step }: { step: number }) {
+  const notes = [
+    ["Given values", "minor arc = 0.7π, radius = 3.5 cm"],
+    ["Arc formula", "arc = 2πr × θ / 360"],
+    ["Minor angle", "0.7π = 7π × x / 360, so x = 36°"],
+    ["Major angle", "y = 360° - 36° = 324°"]
+  ];
+  const [heading, detail] = notes[step] ?? notes[0];
+
+  return (
+    <div className="diagram angleFromArcDiagram" data-angle-arc-step={step}>
+      <svg viewBox="0 0 760 430" role="img" aria-label="Animated calculation of an angle from arc length">
+        <DiagramDefs />
+        <rect width="760" height="430" rx="6" fill="#f6f1e8" />
+        <rect width="760" height="430" rx="6" fill="url(#grid)" opacity="0.75" />
+
+        <g transform="translate(288 220)">
+          <circle className="angleArcCircle" cx="0" cy="0" r="126" />
+          <path className="angleArcSector" d="M0 0 L45 -118 A126 126 0 0 1 109 -63 Z" />
+          <path className="angleArcMinor" d="M45 -118 A126 126 0 0 1 109 -63" />
+          <path className="angleArcMajor" d="M109 -63 A126 126 0 1 1 45 -118" />
+          <line className="angleArcRadius" x1="0" y1="0" x2="45" y2="-118" />
+          <line className="angleArcRadius" x1="0" y1="0" x2="109" y2="-63" />
+          <circle className="angleArcPoint" cx="0" cy="0" r="6" />
+          <circle className="angleArcPoint" cx="45" cy="-118" r="6" />
+          <circle className="angleArcPoint" cx="109" cy="-63" r="6" />
+          <path className="angleArcTheta" d="M34 -10 A36 36 0 0 0 16 -32" />
+          <text className="angleArcLabel radius" x="82" y="2">3.5 cm</text>
+          <text className="angleArcLabel minor" x="82" y="-136">0.7π</text>
+          <text className="angleArcLabel major" x="-92" y="46">y</text>
+          <text className="angleArcLabel theta" x="40" y="-28">x</text>
+        </g>
+
+        <g className="angleArcCard">
+          <rect x="472" y="88" width="226" height="234" rx="10" />
+          <text className="angleArcCardTitle" x="585" y="132">{heading}</text>
+          <text className="angleArcCardDetail" x="585" y="166">{detail}</text>
+          <text className="angleArcFormula one" x="585" y="222">arc = 2πr × θ/360</text>
+          <text className="angleArcFormula two" x="585" y="260">x = 36°</text>
+          <text className="angleArcFormula three" x="585" y="298">y = 324°</text>
         </g>
       </svg>
     </div>

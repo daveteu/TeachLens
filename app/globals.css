@@ -1191,6 +1191,114 @@ h2 {
   stroke-width: 10;
 }
 
+.angleArcCircle {
+  fill: rgba(255, 255, 255, 0.64);
+  stroke: #75818b;
+  stroke-width: 4;
+}
+
+.angleArcSector {
+  fill: rgba(105, 185, 255, 0.18);
+  opacity: 0.35;
+}
+
+.angleArcMinor,
+.angleArcMajor,
+.angleArcRadius,
+.angleArcTheta {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: opacity 240ms ease, stroke-width 240ms ease;
+}
+
+.angleArcMinor {
+  stroke: var(--green);
+  stroke-width: 7;
+}
+
+.angleArcMajor {
+  stroke: rgba(31, 41, 51, 0.22);
+  stroke-width: 4;
+}
+
+.angleArcRadius {
+  stroke: var(--blue);
+  stroke-width: 4;
+}
+
+.angleArcTheta {
+  stroke: var(--orange);
+  stroke-width: 5;
+}
+
+.angleArcPoint {
+  fill: var(--green);
+  stroke: var(--ink);
+  stroke-width: 2;
+}
+
+.angleArcLabel {
+  fill: var(--ink);
+  font-size: 20px;
+  font-weight: 800;
+}
+
+.angleArcLabel.minor {
+  fill: var(--blue);
+  text-anchor: middle;
+}
+
+.angleArcLabel.major,
+.angleArcLabel.theta {
+  font-style: italic;
+}
+
+.angleArcCard rect {
+  fill: rgba(255, 255, 255, 0.74);
+  stroke: var(--line);
+  stroke-width: 3;
+}
+
+.angleArcCardTitle,
+.angleArcCardDetail,
+.angleArcFormula {
+  text-anchor: middle;
+  font-weight: 800;
+}
+
+.angleArcCardTitle {
+  fill: var(--ink);
+  font-size: 24px;
+}
+
+.angleArcCardDetail {
+  fill: var(--muted);
+  font-size: 15px;
+}
+
+.angleArcFormula {
+  fill: var(--blue);
+  font-size: 20px;
+  opacity: 0.32;
+}
+
+.angleFromArcDiagram[data-angle-arc-step="1"] .angleArcFormula.one,
+.angleFromArcDiagram[data-angle-arc-step="2"] .angleArcFormula.two,
+.angleFromArcDiagram[data-angle-arc-step="3"] .angleArcFormula.three {
+  opacity: 1;
+}
+
+.angleFromArcDiagram[data-angle-arc-step="2"] .angleArcTheta,
+.angleFromArcDiagram[data-angle-arc-step="2"] .angleArcMinor {
+  stroke-width: 8;
+}
+
+.angleFromArcDiagram[data-angle-arc-step="3"] .angleArcMajor {
+  stroke: var(--orange);
+  stroke-width: 7;
+}
+
 .algebraEquation,
 .tileLabel,
 .outsideFactor,
