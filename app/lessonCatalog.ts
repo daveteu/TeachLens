@@ -172,7 +172,7 @@ export const lessonCatalog = [
     title: "Angle from Arc Length",
     question: "How do you calculate a central angle from arc length and radius?",
     formula: "arc = 2 pi r x theta / 360, then major angle = 360 - minor angle",
-    difficulty: "Geometry",
+    difficulty: "Arc Length",
     minutes: 8
   }
 ];
