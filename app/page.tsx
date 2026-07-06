@@ -710,6 +710,7 @@ type LessonWriteup = {
   sections: {
     heading: string;
     body: ReactNode;
+    visual?: ReactNode;
     math: ReactNode[];
   }[];
 };
@@ -1421,6 +1422,70 @@ const lessonWriteups: Record<string, LessonWriteup> = {
         ]
       }
     ]
+  },
+  radians: {
+    title: "Worked Example",
+    intro: "Sometimes the question gives the arc length and radius, then asks for the angle. First find the minor angle, then decide whether the question wants the minor angle or the major angle.",
+    sections: [
+      {
+        heading: "Step 1: Identify the radius and the requested angle",
+        body: "The radius is 3.5 cm and the minor arc length is 0.7π. The question asks for the major angle y, so we first find the minor angle x.",
+        visual: <AngleFromArcFigure />,
+        math: [
+          <MathLine key="angle-radius">
+            r <MathOp>=</MathOp> 3.5 cm
+          </MathLine>,
+          <MathLine key="angle-arc">
+            minor arc length <MathOp>=</MathOp> 0.7π
+          </MathLine>,
+          <MathLine key="angle-relation">
+            y <MathOp>=</MathOp> 360° <MathOp>-</MathOp> x
+          </MathLine>
+        ]
+      },
+      {
+        heading: "Step 2: Substitute into the arc length formula",
+        body: "When the angle is in degrees, use the angle as a fraction of the full circumference.",
+        math: [
+          <MathLine key="arc-formula">
+            arc length <MathOp>=</MathOp> 2πr <MathOp>×</MathOp> <Fraction numerator="θ" denominator="360" />
+          </MathLine>,
+          <MathLine key="arc-substitute">
+            0.7π <MathOp>=</MathOp> 2π(3.5) <MathOp>×</MathOp> <Fraction numerator="x" denominator="360" />
+          </MathLine>,
+          <MathLine key="arc-simplify">
+            0.7π <MathOp>=</MathOp> 7π <MathOp>×</MathOp> <Fraction numerator="x" denominator="360" />
+          </MathLine>
+        ]
+      },
+      {
+        heading: "Step 3: Solve for the minor angle",
+        body: "Cancel π from both sides, then undo the multiplication by 7 over 360.",
+        math: [
+          <MathLine key="solve-cancel">
+            0.7 <MathOp>=</MathOp> <Fraction numerator="7x" denominator="360" />
+          </MathLine>,
+          <MathLine key="solve-multiply">
+            0.7 <MathOp>×</MathOp> 360 <MathOp>=</MathOp> 7x
+          </MathLine>,
+          <MathLine key="solve-divide">
+            x <MathOp>=</MathOp> <Fraction numerator="0.7 × 360" denominator="7" /> <MathOp>=</MathOp> 36°
+          </MathLine>
+        ]
+      },
+      {
+        heading: "Step 4: Convert to the major angle",
+        body: "The question asks for the major angle y, so subtract the minor angle from a full turn.",
+        math: [
+          <MathLine key="major-relation">
+            y <MathOp>=</MathOp> 360° <MathOp>-</MathOp> x
+          </MathLine>,
+          <MathLine key="major-answer">
+            y <MathOp>=</MathOp> 360° <MathOp>-</MathOp> 36° <MathOp>=</MathOp> 324°
+          </MathLine>
+        ]
+      }
+    ]
   }
 };
 
@@ -1651,6 +1716,7 @@ function LessonWriteupPanel({ writeup }: { writeup: LessonWriteup }) {
           <article className="writeupStep" key={section.heading}>
             <h4>{section.heading}</h4>
             <p>{section.body}</p>
+            {section.visual && <div className="writeupVisual">{section.visual}</div>}
             <div className="writeupMathList">
               {section.math.map((line, index) => (
                 <div className="writeupMath" key={index}>
@@ -1761,6 +1827,29 @@ function Root({ children }: { children: ReactNode }) {
     <span className="mathRoot">
       <span>{children}</span>
     </span>
+  );
+}
+
+function AngleFromArcFigure() {
+  return (
+    <svg className="arcAngleFigure" viewBox="0 0 520 300" role="img" aria-label="Circle showing a minor arc and a major central angle">
+      <rect x="0" y="0" width="520" height="300" rx="10" />
+      <g transform="translate(250 148)">
+        <circle className="arcFigureCircle" cx="0" cy="0" r="96" />
+        <path className="arcFigureSector" d="M0 0 L34 -90 A96 96 0 0 1 83 -48 Z" />
+        <path className="arcFigureMinor" d="M34 -90 A96 96 0 0 1 83 -48" />
+        <path className="arcFigureMajor" d="M83 -48 A96 96 0 1 1 34 -90" />
+        <line className="arcFigureRadius" x1="0" y1="0" x2="34" y2="-90" />
+        <line className="arcFigureRadius" x1="0" y1="0" x2="83" y2="-48" />
+        <circle className="arcFigurePoint" cx="0" cy="0" r="5" />
+        <circle className="arcFigurePoint" cx="34" cy="-90" r="5" />
+        <circle className="arcFigurePoint" cx="83" cy="-48" r="5" />
+        <path className="arcFigureAngle" d="M25 -8 A27 27 0 0 0 12 -25" />
+        <text className="arcFigureLabel" x="64" y="-4">3.5 cm</text>
+        <text className="arcFigureLabel majorLabel" x="-72" y="40">y</text>
+        <text className="arcFigureLabel minorLabel" x="60" y="-96">minor arc = 0.7π</text>
+      </g>
+    </svg>
   );
 }
 
