@@ -730,13 +730,13 @@ const lessons = [
   {
     id: "angle-from-arc",
     title: "Angle from Arc Length",
-    category: "Circles",
+    category: "Arc Length",
     eyebrow: "Calculate theta",
     steps: angleFromArcSteps
   }
 ];
 
-const lessonCategories = ["Algebra", "Matrices", "Geometry", "Trigonometry", "Circles"];
+const lessonCategories = ["Algebra", "Matrices", "Geometry", "Trigonometry", "Circles", "Arc Length"];
 
 type LessonWriteup = {
   title: string;
