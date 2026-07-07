@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "generate:worksheets": "node scripts/generate-sector-worksheet.mjs",
     "start": "next start",
     "lint": "next lint"
   },

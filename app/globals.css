@@ -479,6 +479,28 @@ h2 {
   font-size: clamp(0.98rem, 1.3vw, 1.12rem);
 }
 
+.downloadWorksheet {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  min-height: 42px;
+  margin-top: 4px;
+  border: 1px solid var(--blue);
+  border-radius: 8px;
+  background: var(--blue);
+  color: #fff;
+  font-weight: 800;
+  padding: 10px 14px;
+  text-decoration: none;
+}
+
+.downloadWorksheet:hover,
+.downloadWorksheet:focus-visible {
+  background: var(--ink);
+  border-color: var(--ink);
+}
+
 .diagram {
   min-height: 0;
 }

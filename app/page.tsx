@@ -737,6 +737,7 @@ const lessons = [
 ];
 
 const lessonCategories = ["Algebra", "Matrices", "Geometry", "Trigonometry", "Circles", "Arc Length"];
+const sectorWorksheetUrl = "/worksheets/sector-area-perimeter-worksheet.pdf";
 
 type LessonWriteup = {
   title: string;
@@ -1544,6 +1545,7 @@ export default function Home({ initialLessonId }: { initialLessonId?: string } =
   const lesson = lessons[lessonIndex];
   const activeStep = lesson.steps[step];
   const writeup = lessonWriteups[lesson.id];
+  const hasSectorWorksheet = lesson.id === "sector-area" || lesson.id === "sector-perimeter";
   const footerLinks = lessonCategories.flatMap((category) => {
     const firstLesson = lessons.find((item) => item.category === category);
     return firstLesson ? [firstLesson] : [];
@@ -1667,6 +1669,11 @@ export default function Home({ initialLessonId }: { initialLessonId?: string } =
               <p className="lessonEyebrow">{lesson.eyebrow}</p>
               <h2>{activeStep.title}</h2>
               <div className="formula formulaBanner">{activeStep.formula}</div>
+              {hasSectorWorksheet && (
+                <a className="downloadWorksheet" href={sectorWorksheetUrl} download>
+                  Download Worksheet
+                </a>
+              )}
             </div>
           </div>
 
